@@ -228,6 +228,12 @@ void Widget::onEnter()
 
 void Widget::onExit()
 {
+    //Visual Leak Detector detected memory leaks!
+    if(this->_touchEventCallback)
+    	this->_touchEventCallback = nullptr;
+    if(this->_clickEventListener)
+    	this->_clickEventListener = nullptr;
+	
     unscheduleUpdate();
     ProtectedNode::onExit();
 }
